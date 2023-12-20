@@ -19,7 +19,7 @@ Follow these steps to get the project set up on your local machine.
     ```bash
     cd nortec
     pip install -r requirements.txt
-3. Set up the serfver and session string
+3. Set up the server and session string
     Follow the instructions in the [Getting the server and session string](#getting-the-server-and-session-string)
 
 

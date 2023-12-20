@@ -1,24 +1,42 @@
-# Nortec.py
+# Nortec / E-vaskeri
 
 ## Description
-A brief description of what the `nortec.py` script does.
-
+`Nortec.py` allows the user to retrieve information about washing and drying machines located at a nortec site. Such as time remaining, program, current stage of program etc.  It also allows the user to retrieve reciepts and saldo.
+ 
 ## Installation
-Instructions on how to install any dependencies required by the script.
+Follow these steps to get the project set up on your local machine.
+
+1. **Clone the repository**
+
+   First, you will need to clone the repository using Git. You can do this by running the following command in your terminal:
+
+   ```bash
+   git clone https://github.com/kasperkls02/nortec.git
+2. **Install dependencies**
+    This project requires Python and some Python packages. Make sure you have Python installed on your machine. You can download it from [here](https://www.python.org/downloads/).
+
+    After installing python, navigate to the project directory and install the required packages using pip:
+    ```bash
+    cd nortec
+    pip install -r requirements.txt
+3. Set up the serfver and session string
+    Follow the instructions in the [Getting the server and session string](#getting-the-server-and-session-string)
 
 
 ## Getting the server and session string
-It has not yet been possible to get the session string directly from a request on the server, so we first have to fetch that manually using DevTools. 
-Login to https://e-vaskeri.dk/ or a similar Nortec page. 
-Now open the DevTool F12 and open the Network tab and select only 'Fetch/XHR'
-Either reload the page or wait for refresh. It should be named along the lines of ".../?App=TUK@session=..."
-Open the request and copy copy the request url it should be along the lines of: 
-https://backend.nortec1.dk/User/Refresh1/?App=TUK&session=asdasdadasdasdddas&tabid=&tick=1703096297554&native=false&.json
+Currently, it's not possible to get the session string directly from a request on the server. However, you can obtain it by following these steps:
+1. Visit the Nortec or [e-vaskeri.dk](https://e-vaskeri.dk/) website and log in with your credentials
+2. After logging in, open the developer tools in your browser (usually by pressing F12). Open the Network tab and select 'Fetch/XHR'. Now reload the website (usually by Ctrl+R).
+Now find look for a request that is named along the lines of ".../?App=TUK@session=..."
 
-We need 
-* server: https://backend.nortec1.dk
-* session: asdasdadasdasdddas
+3. Open the request and copy copy the request url it should be along the lines of: 
+    https://backend.nortec1.dk/User/Refresh1/?App=TUK&session=asdasdadasdasdddas&tabid=&tick=1703096297554&native=false&.json
 
+    We need 
+    * server: 'https://backend.nortec1.dk/'
+    * session: 'asdasdadasdasdddas'
+
+    Remember that the session is private and should not be shared with other people.
 ## Functions and examples
 ### get_machines(server, session):
 The ```get_machines(server, session)``` function return a list that contains the timestamp provided by the server when the request was made and a second list containing information about the site. 
@@ -30,7 +48,7 @@ The response is on the form:
 ```
 
 ```Python
->>> print(get_machines(server, session))
+>>> print(get_machines('https://backend.nortec1.dk/', session))
 ('18:48', [['Vaskemaskine 1', 'unit5', 'asddas'], ['Vaskemaskine 2', 'unit5', 'adsfgf'], ['Vaskemaskine 3', 'unit5','jgudjg']]) 
 ```
 
@@ -112,13 +130,9 @@ The ```get_saldo(server, session)``` is a function that extracts the current and
 ```
 
 
-
-
 ## Contributing
-Information on how others can contribute to the development of the `nortec.py` script.
+Pull requests and issues are always welcome. 
 
-## License
-Information about the license under which the `nortec.py` script is distributed.
-
-## Contact
-How to get in touch with the author or maintainers of the `nortec.py` script.
+TODO:
+- Retrieve session from a standard post request on the login url
+- Retrieve if a machine is currently in use by user. Response from ```../../User/Home3/``` should contains this information

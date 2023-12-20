@@ -2,8 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='nortec',
-    version='0.1',
+    version='0.3',
     packages=find_packages(),
+    py_modules=["nortec"],
     description='A Python package for retrieving data from Nortec/Evaskeri backend',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -16,6 +17,7 @@ setup(
     ],
     install_requires=[
         'requests',
-        'beautifulsoup4'
+        'beautifulsoup4',
+        'lxml'
     ],
 )

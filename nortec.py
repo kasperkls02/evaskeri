@@ -42,7 +42,8 @@ def get_state(server, unit, machineIdentifier):
         return "Failed to fetch the SVG content."
     with open('response_content.svg', 'wb') as file:
         file.write(response.content)
-    soup = BeautifulSoup(response.content, 'xml')
+    #soup = BeautifulSoup(response.content, 'xml')
+    soup = BeautifulSoup(response.content, 'html.parser')
     text_tags = soup.find_all('text')
     
     text_values = [tag.get_text() for tag in text_tags]
